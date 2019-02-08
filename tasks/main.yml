@@ -1,0 +1,20 @@
+---
+- name: Install Packages
+  xbps:
+    pkg: node_exporter
+    state: present
+
+- name: Configure Firewall
+  copy:
+    src: node_exporter.rules
+    dest: /etc/iptables.d/node_exporter.rules
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+    - iptables
+
+- name: Enable Service
+  service:
+    name: node_exporter
+    enabled: yes
