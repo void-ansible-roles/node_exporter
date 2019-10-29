@@ -1,0 +1,17 @@
+---
+dependencies:
+  - { role: void.network }
+
+galaxy_info:
+  role_name: node_exporter
+  author: Michael Aldridge
+  description: prometheus node_exporter
+  license: license (MIT)
+  min_ansible_version: 1.2
+  platforms:
+    - name: Void Linux
+      version:
+        - all
+  galaxy_tags:
+    - prometheus
+    - metrics
