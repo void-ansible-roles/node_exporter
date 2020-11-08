@@ -18,3 +18,14 @@
   service:
     name: node_exporter
     enabled: yes
+
+- name: Install Consul Service
+  template:
+    src: node_exporter.hcl
+    dest: "{{node_exporter_consul_path}}"
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - node_exporter_consul_path is defined
+    - node_exporter_consul_token is defined
