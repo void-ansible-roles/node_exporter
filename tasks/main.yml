@@ -1,31 +1,31 @@
 ---
 - name: Install Packages
-  xbps:
+  community.general.xbps:
     pkg: node_exporter
     state: present
 
 - name: Configure Firewall
-  copy:
+  ansible.builtin.copy:
     src: node_exporter.rules
     dest: /etc/iptables.d/node_exporter.rules
     owner: root
     group: root
-    mode: 0640
+    mode: "0640"
   notify:
     - iptables
 
 - name: Enable Service
-  service:
+  ansible.builtin.service:
     name: node_exporter
-    enabled: yes
+    enabled: true
 
 - name: Install Consul Service
-  template:
+  ansible.builtin.template:
     src: node_exporter.hcl
-    dest: "{{node_exporter_consul_path}}"
+    dest: "{{ node_exporter_consul_path }}"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when:
     - node_exporter_consul_path is defined
     - node_exporter_consul_token is defined
